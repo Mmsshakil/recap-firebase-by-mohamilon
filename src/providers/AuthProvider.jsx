@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 
 // 1. create createContext
@@ -20,6 +20,11 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    // for signout
+    const logOut = () =>{
+        return signOut(auth);
+    }
+
     // ------------------------ problem part-------------------------------------------
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
@@ -34,8 +39,8 @@ const AuthProvider = ({ children }) => {
     }, [])
     // ---------------------------------------------------------------------
 
-    const authInfo = { user, createUser, signInUser }
-    console.log(authInfo);
+    const authInfo = { user, createUser, signInUser, logOut }
+    console.log('Auth observing',authInfo);
 
     return (
         // 2. set provider with value
