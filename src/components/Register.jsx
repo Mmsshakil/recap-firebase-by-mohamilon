@@ -4,7 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const Register = () => {
 
-    const {createUser} = useContext(AuthContext);
+    const { createUser } = useContext(AuthContext);
 
     const handleRegister = e => {
         e.preventDefault();
@@ -17,12 +17,12 @@ const Register = () => {
         // create user firebase
 
         createUser(email, password)
-        .then(result =>{
-            console.log(result.user);
-        })
-        .catch(error =>{
-            console.log(error);
-        })
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
     }
 
